@@ -4,10 +4,11 @@ const app = express();
 import authRoutes from "./routes/auth.routes.js"
 import connectMongoDB from "./db/connectMongoDB.js";
 dotenv.config();
-
-
 const PORT = process.env.PORT || 5000;
-dotenv.config();
+
+//middleware is a function that runs between request and response
+app.use(express.json());  //to parse req.body - form data which is coming from react
+app.use(express.urlencoded({ extended: true })) //to parse from data(urlencoded)
 
 //app.get looks for a callback fuction and app.use can handle post, get, put etc...
 app.use("/api/auth", authRoutes);
